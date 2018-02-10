@@ -25,7 +25,7 @@ function split_name_ncd ()
 function rename () 
 {	
 	echo "rename"
-	declare -a pythonolddirs=("Python/" "Python3/" "Python2")
+	declare -a pythonolddirs=("Python/" "Python3/" "Python2/")
 	declare -a others=("C/" "C#/" "NodeJS/" "CPP/" "JS/" "Swift/")
 	pwd
 	sleep 1
@@ -37,6 +37,7 @@ function rename ()
 		case "${pythonolddirs[@]}" in *"$d"*) 
 				echo "found" 
 				sleep .5
+				echo "${pythonolddirs[@]}"
 				#mv "$d" "py/" ;;
 				git mv "$d" "py/" ;;
 			*) echo "--" ;;
