@@ -60,9 +60,10 @@ function add_changes ()
 	git add --all
 	git commit -m "Rename"
 	git push -u origin master
+	sleep 2
 }
 
-mkdir clones; mv gitlinks.txt clones/; cd clones  # make a new dir and go to it
+mkdir clones; mv gitlinks.txt clones/; cd clones;  # make a new dir and go to it
 
 # echo "Enter file (ex: file.txt): "
 # read file
@@ -79,7 +80,7 @@ mkdir clones; mv gitlinks.txt clones/; cd clones  # make a new dir and go to it
 while read link; 
 do
  	printf "link %s\n" $link
-	#clone $link
+	clone $link
 	split_name_ncd $link
 	rename
 	#echo $link
