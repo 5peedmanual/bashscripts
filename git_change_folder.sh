@@ -87,7 +87,7 @@ do
 	#echo $link
 	# IFS=$STOREIFS
 	# unset IFS
-	exit 0
+	#exit 0
 done <gitlinks.txt
 
 
