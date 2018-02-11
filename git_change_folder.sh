@@ -46,7 +46,7 @@ function rename ()
 				echo "found"
 				sleep .5
 				#mv "$d" `echo "$d" | tr 'A-Z' 'a-z'` ;;
-				git mv "$d" tmp ;;
+				git mv "$d" tmp
 				git mv tmp `echo "$d" | tr 'A-Z' 'a-z'`;;
 		*) echo "not found" ;;
 		esac 
