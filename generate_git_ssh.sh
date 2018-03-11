@@ -1,7 +1,19 @@
 #!/bin/bash
+#: Description	: checks if xclip and openssh are installed
+#		: generates a rsa key with 4096 bits
+#		: adds it to ssh-agent and copies key to clipboard
+
+
+checkssh="$(command -v ssh-add ssh-agent ssh-keygen 2>&1)"
 
 echo "Checking xclip..."
-command -v xclip 2>&1 || echo "Please install xclip. Aborting..."
+command -v xclip 2>&1 || (echo "Please install xclip. Aborting..." && exit 1)
+if [ $? -eq 0 ]
+then
+	echo "Proceding."
+fi
+echo "Checking openssh..."
+echo "${checkssh}" || (echo "Please install openssh. Aborting..." && exit 1)
 if [ $? -eq 0 ]
 then
 	echo "Proceding."
