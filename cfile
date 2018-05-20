@@ -11,6 +11,7 @@ function usage ()
 function fill_c ()
 {
 	printf "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>" > "$1"
+	printf "done\n"
 }
 
 function fill_sh ()
@@ -20,6 +21,7 @@ function fill_sh ()
 	printf "#: in		: %s \n" "$(uname -n)" >> "$1"
 	printf "#: time		: %s \n" "$(date)"
 	printf "#: Description	:\n" >> "$1"	
+	printf "done\n"
 }
 
 function create_file () 
@@ -31,14 +33,13 @@ function create_file ()
 	else
 		> "$1"
 	fi
-	printf "done\n"
+
 
 }
 
 function check_type () 
 {
 	var="$1"
-	echo "${var^^}"
 	case ${var^^} in
 		C) fill_c $2 ;;
 		SH) fill_sh $2 ;;
@@ -49,7 +50,6 @@ function check_type ()
 
 
 prog_name=${0##*/} ## get the name with with its path
-echo "$prog_name" #cfile
 
 ## default values
 name=
