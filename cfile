@@ -1,0 +1,101 @@
+#!/bin/bash
+
+function usage () 
+{
+	if [ -z $1 ]
+	then
+		printf "usage: cfile <name-of-file>\n"
+	fi
+}
+
+function fill_c ()
+{
+	printf "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>" > "$1"
+}
+
+function fill_sh ()
+{
+	printf "#!bin/bash\n" > "$1"
+	printf "#: created by	: %s \n" "$USER" >> "$1"
+	printf "#: in		: %s \n" "$(uname -n)" >> "$1"
+	printf "#: time		: %s \n" "$
+	printf "#: Description	: \n" >> "$1"	
+}
+
+function create_file () 
+{
+	printf "creating file...\n"
+	if [ $1 ] && [ $2 ] # if both args where passed
+	then
+		> "$1.$2" # create file with extention
+	else
+		> "$1"
+	fi
+	printf "done\n"
+
+}
+
+function check_type () 
+{
+	var="$1"
+	echo "${var^^}"
+	case ${var^^} in
+		C) fill_c $2 ;;
+		SH) fill_sh $2 ;;
+		"") ;;
+		*) printf "[check_type] duno\n" ;;
+	esac
+}
+
+
+prog_name=${0##*/} ## get the name with with its path
+echo "$prog_name" #cfile
+
+## default values
+name=
+typeof_file=
+file=
+## list of options 
+optstring=n:t:
+
+## the loop calls getopts until none left in the cmd
+## each option is stored in $opt, any option arguments
+## are stored in OPTAR
+
+while getopts $optstring opt
+do
+	case $opt in
+		n) name=$OPTARG ;;
+		t) typeof_file=$OPTARG ;;
+		*) exit 1 ;;
+	esac
+done
+
+## remove options from the cmd
+## $OPTIND points to the next unparsed arg
+shift "$(( $OPTIND -1 ))"
+
+## check if name
+if [ -n "$name" ]
+then
+	if [ -n $typeof_file ]
+	then
+		file="$name.$typeof_file"
+		printf "name: %s\n" "$name"
+		printf "filetype: %s\n" $typeof_file
+		create_file $name $typeof_file
+		check_type $typeof_file $file
+	else
+		printf "name: %s\nno filetype\ntry: -t" "$name"
+		create file $name
+	fi
+		
+else
+	printf "No filename entered.\nTry: -n\n" <&2
+	exit 1
+fi
+
+
+#> "$1.c"
+
+#printf "Done.\n"
