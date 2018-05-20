@@ -4,7 +4,7 @@ function usage ()
 {
 	if [ -z $1 ]
 	then
-		printf "usage: cfile <name-of-file>\n"
+		printf "usage: cfile -n <name-of-file> -t <file-extension> (c or sh)\n"
 	fi
 }
 
@@ -18,8 +18,8 @@ function fill_sh ()
 	printf "#!bin/bash\n" > "$1"
 	printf "#: created by	: %s \n" "$USER" >> "$1"
 	printf "#: in		: %s \n" "$(uname -n)" >> "$1"
-	printf "#: time		: %s \n" "$
-	printf "#: Description	: \n" >> "$1"	
+	printf "#: time		: %s \n" "$(date)"
+	printf "#: Description	:\n" >> "$1"	
 }
 
 function create_file () 
@@ -94,8 +94,3 @@ else
 	printf "No filename entered.\nTry: -n\n" <&2
 	exit 1
 fi
-
-
-#> "$1.c"
-
-#printf "Done.\n"
