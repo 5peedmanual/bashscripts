@@ -1,0 +1,10 @@
+#!/bin/sh
+
+dir="/sys/bus/i2c/devices"
+cd $dir
+ls=$(ls $dir)
+
+for i in $ls;
+do
+	cat $i/name
+done
